@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>dom选择器demo</title>
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta name="renderer" content="webkit">
+	</head>
+
+	<body>
+		<ul id="test1">
+            <li>aaaaaaa</li>
+            <li>aaaaaaa<h1>温热温热</h1></li>
+            <li>aaaaaaa</li>
+            <li>aaaaaaa</li>
+        </ul>
+        <script type="text/javascript" src="../js/lib/requirejs2.1.22.min.js?v=@@version"></script>
+        <script type="text/javascript" src="../js/page/global.js?v=@@version"></script>
+        <script>
+            requirejs(['dom/domWalk'],function($domWalk){
+                //console.log($domWalk.downAll(document.getElementById('test1')));
+                console.log($domWalk.downAll(document.getElementById('test1'),function(node){
+                    return node.tagName.toLowerCase() == 'li';
+                }));
+            });
+        </script>
+	</body>
+</html>

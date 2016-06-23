@@ -1,0 +1,21 @@
+本dom选择器插件，只实现document.querySelectorAll识别的css选择器，做向下兼容。
+
+可识别的css选择器包括：
+    1. 基础选择器
+        #id
+        .classname
+        tagname   不区分大小写，系统统一成小写
+        [attrname="attrvalue"] 属性选择器
+    2. 复合选择：基础选择器拼接：input[type="text"]
+    3. 层级选择：基础选择器层级：
+                祖先 子元素
+                父元素>子元素
+    4. 混合选择：基础选择器,号隔开
+
+模块设计：
+
+    1. domWalk: dom遍历单体对象；
+    
+    2. cssSelector: css选择器识别单体对象；
+    
+    3. domSelector: dom选择器类；并添加window.S：dom选择方法入口
