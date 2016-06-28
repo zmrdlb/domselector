@@ -10,20 +10,38 @@
 	</head>
 
 	<body>
-		<ul id="test1">
-            <li>aaaaaaa</li>
-            <li>aaaaaaa<h1>温热温热</h1></li>
-            <li>aaaaaaa</li>
-            <li>aaaaaaa</li>
-        </ul>
+	    <ul id="test3">
+	        <li>
+	            <ul id="test1">
+                    <li>aa</li>
+                    <li>bb<h1>温热温热</h1></li>
+                    <li id="test2">cc</li>
+                    <li>dd</li>
+                </ul>
+	        </li>
+	        <li class="myli">哈哈</li>
+	        <li class="myli">BII</li>
+	    </ul>
+		
         <script type="text/javascript" src="../js/lib/requirejs2.1.22.min.js?v=@@version"></script>
         <script type="text/javascript" src="../js/page/global.js?v=@@version"></script>
         <script>
-            requirejs(['dom/domWalk'],function($domWalk){
-                //console.log($domWalk.downAll(document.getElementById('test1')));
-                console.log($domWalk.downAll(document.getElementById('test1'),function(node){
-                    return node.tagName.toLowerCase() == 'li';
-                }));
+            // requirejs(['dom/domWalk'],function($domWalk){
+                // //console.log($domWalk.downAll(document.getElementById('test1')));
+                // console.log($domWalk.downAll(document.getElementById('test1'),function(node){
+                    // return node.tagName.toLowerCase() == 'li';
+                // }));
+            // });
+            
+            requirejs(['dom/domSelector'],function($domSelector){
+                console.log(Z('#test1'));
+                console.log(Z('li','#test1'));
+                console.log(Z('li',Z('#test1')));
+                console.log(Z('li',document.getElementById('test1')));
+                console.log(Z('li'));
+                console.log(Z('#test2','#test3'));
+                console.log(Z('h1','li'));
+                console.log(Z('h1',document.getElementsByTagName('li')));
             });
         </script>
 	</body>
