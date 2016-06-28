@@ -15,8 +15,10 @@ define(['dom/cssSelector'],function($cssSelector){
             return 0;
         }else if(arr.constructor == Array){
             return 1;
-        }else if(typeof arr.item == 'function'){
+        }else if(arr.constructor == DomSelector){
             return 2;
+        }else if(typeof arr.item == 'function'){
+            return 3;
         }else{
             return 0;
         }
@@ -25,12 +27,15 @@ define(['dom/cssSelector'],function($cssSelector){
     /**
      * 节点选择
      * @param {String} *selector 选择器
-     * @param {Element|Array|String} parent 父节点，从此节点下遍历符合selector的元素
+     * @param {Element|Array|String|DomSelector对象} parent 父节点，从此节点下遍历符合selector的元素
      */
     function DomSelector(selector,parent){
+        this.selector = selector;
+        this.results = [];
+        
         //参数检测
         if(typeof selector != 'string' || selector == ''){
-            return [];
+            return this.results;
         }
         //parent是一个选择器字符串
         if(parent == undefined){
@@ -42,6 +47,8 @@ define(['dom/cssSelector'],function($cssSelector){
         var ptype = checkDomArray(parent);
         if(ptype > 0){
             if(ptype == 2){
+                parent = parent.results;
+            }else if(ptype == 3){
                 parent = Array.prototype.slice.call(parent);
             }
             //对parent进行排重，对于里面是父子关系的元素，删除子元素
@@ -56,7 +63,6 @@ define(['dom/cssSelector'],function($cssSelector){
                      return -1;
                  }
             });
-            window.test = parent;
             //删除多余的元素
             var i = 0;
             while(i < parent.length){
@@ -66,18 +72,23 @@ define(['dom/cssSelector'],function($cssSelector){
                     i++;
                 }
             }
-            var results = [];
             for(var i = 0, len = parent.length; i < len; i++){
                 var itemarr = $cssSelector(selector,parent[i]);
-                push.apply(results, itemarr);
+                push.apply(this.results, itemarr);
             }
-            return results;
         }else{
-            return $cssSelector(selector,parent);
+            this.results = $cssSelector(selector,parent);
         }
     }
     
-    window.Z = DomSelector;
+    DomSelector.prototype.toString = function(){
+        return this.results;
+    };
+    
+    window.Z = function(selector,parent){
+        return new DomSelector(selector,parent);
+    };
+    
     return DomSelector;
     
 });

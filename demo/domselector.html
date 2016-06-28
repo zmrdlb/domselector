@@ -33,15 +33,15 @@
                 // }));
             // });
             
-            requirejs(['dom/domSelector'],function($domSelector){
-                console.log(Z('#test1'));
-                console.log(Z('li','#test1'));
-                console.log(Z('li',Z('#test1')));
-                console.log(Z('li',document.getElementById('test1')));
-                console.log(Z('li'));
-                console.log(Z('#test2','#test3'));
-                console.log(Z('h1','li'));
-                console.log(Z('h1',document.getElementsByTagName('li')));
+            requirejs(['dom/domSelector'],function(){
+                console.log(Z('#test1').toString());
+                console.log(Z('li','#test1').toString());
+                console.log(Z('li',Z('#test1')).toString());
+                console.log(Z('li',document.getElementById('test1')).toString());
+                console.log(Z('li').toString());
+                console.log(Z('#test2','#test3').toString());
+                console.log(Z('h1','li').toString());
+                console.log(Z('h1',document.getElementsByTagName('li')).toString());
             });
         </script>
 	</body>
