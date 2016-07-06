@@ -1,4 +1,5 @@
 /**
+ * 参考资料：jquery源码sizzle
  * @fileoverview css选择器单体
  * @version 1.0.0 | 2016-06-23 版本信息
  * @author Zhang Mingrui | 592044573@qq.com
